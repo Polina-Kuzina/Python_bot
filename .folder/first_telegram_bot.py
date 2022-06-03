@@ -10,7 +10,7 @@ app.add_handler(CommandHandler("help", help_command))
 app.add_handler(CommandHandler("hello", hello))
 app.add_handler(CommandHandler("sum", sum_command))
 app.add_handler(CommandHandler('save', save_video))
-# app.add_handler(CommandHandler("weather", get_weather))
+app.add_handler(CommandHandler("weather", get_weather))
 
 print('server start')
 app.run_polling(stop_signals=None)

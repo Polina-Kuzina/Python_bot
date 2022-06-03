@@ -2,6 +2,9 @@ from telegram import Update
 from telegram.ext import ApplicationBuilder, CommandHandler, ContextTypes
 import pytube
 from pytube import YouTube
+from pyowm import OWM
+from pyowm.utils import config
+from pyowm.utils import timestamps
 
 
 
@@ -36,3 +39,14 @@ async def sum_command(update: Update, context: ContextTypes):
     y = int(items[2])
     await update.message.reply_text(f'{x} + {y} = {x+y}') 
 
+async def get_weather(update: Update, context: ContextTypes):
+    global app
+    msg = update.message.text
+    print(msg) 
+    items = msg.split(' ') 
+    owm = OWM('e908ba695c04db4c36951211940d36ad')
+    mgr = owm.weather_manager()    
+    observation = mgr.weather_at_place(items[1])
+    w = observation.weather 
+    print(w.temperature('celsius'))   
+    await update.message.reply_text(w.temperature('celsius')) 
